@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>NETXSHOPE</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
+}
+
+header{
+background:black;
+padding:20px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+color:#00ff88;
+box-shadow:0 0 20px #00ff88;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+padding:20px;
+}
+
+.produto{
+background:#111;
+border-radius:10px;
+padding:20px;
+margin:15px;
+width:220px;
+text-align:center;
+box-shadow:0 0 15px #00ff88;
+transition:0.3s;
+}
+
+.produto:hover{
+transform:scale(1.05);
+}
+
+button{
+background:#00ff88;
+border:none;
+padding:10px 15px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#00cc6a;
+}
+
+.carrinho{
+position:fixed;
+right:0;
+top:0;
+width:280px;
+height:100%;
+background:black;
+padding:20px;
+box-shadow:-5px 0 15px #00ff88;
+overflow:auto;
+}
+
+.total{
+margin-top:20px;
+font-size:20px;
+}
+
+.whatsapp{
+background:#25d366;
+width:100%;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>NETXSHOPE</header>
+
+<div class="container">
+
+<div class="produto">
+<h3>Fone Gamer</h3>
+<p>R$ 120</p>
+<button onclick="addCarrinho('Fone Gamer',120)">Comprar</button>
+</div>
+
+<div class="produto">
+<h3>Smartwatch</h3>
+<p>R$ 200</p>
+<button onclick="addCarrinho('Smartwatch',200)">Comprar</button>
+</div>
+
+<div class="produto">
+<h3>Teclado RGB</h3>
+<p>R$ 150</p>
+<button onclick="addCarrinho('Teclado RGB',150)">Comprar</button>
+</div>
+
+<div class="produto">
+<h3>Mouse Gamer</h3>
+<p>R$ 80</p>
+<button onclick="addCarrinho('Mouse Gamer',80)">Comprar</button>
+</div>
+
+</div>
+
+<div class="carrinho">
+<h2>🛒 Carrinho</h2>
+<ul id="lista"></ul>
+<div class="total">Total: R$ <span id="total">0</span></div>
+
+<button class="whatsapp" onclick="finalizarCompra()">
+Finalizar no WhatsApp
+</button>
+</div>
+
+<script>
+let carrinho = [];
+let total = 0;
+
+function addCarrinho(nome, preco){
+carrinho.push(nome + " - R$" + preco);
+total += preco;
+atualizar();
+}
+
+function atualizar(){
+let lista = document.getElementById("lista");
+lista.innerHTML="";
+
+carrinho.forEach(item=>{
+let li=document.createElement("li");
+li.textContent=item;
+lista.appendChild(li);
+});
+
+document.getElementById("total").textContent=total;
+}
+
+function finalizarCompra(){
+if(carrinho.length==0){
+alert("Seu carrinho está vazio!");
+return;
+}
+
+let mensagem="Olá, quero comprar:%0A";
+carrinho.forEach(item=>{
+mensagem+=item+"%0A";
+});
+mensagem+="Total: R$"+total;
+
+window.open("https://wa.me/5535989911405?text="+mensagem);
+}
+</script>
+
+</body>
+  </html>
