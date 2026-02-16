@@ -13,6 +13,36 @@ background:#1f1f1f;
 color:white;
 }
 
+/* MENU LATERAL */
+.menu-btn{
+position:absolute;
+left:20px;
+font-size:28px;
+cursor:pointer;
+color:white;
+}
+
+.sidebar{
+position:fixed;
+top:0;
+left:-280px;
+width:260px;
+height:100%;
+background:#0f5132;
+padding:25px;
+transition:0.3s;
+box-shadow:4px 0 15px rgba(0,0,0,0.5);
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar p{
+margin-top:60px;
+font-size:18px;
+}
+
 /* HEADER */
 header{
 background:#0f5132;
@@ -21,6 +51,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 box-shadow:0 4px 10px rgba(0,0,0,0.4);
+position:relative;
 }
 
 .logo{
@@ -101,7 +132,13 @@ margin-top:50px;
 
 <body>
 
+<!-- MENU LATERAL -->
+<div class="sidebar" id="sidebar">
+<p>Os itens vendidos são fornecidos pela loja vizinha.</p>
+</div>
+
 <header>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 <div class="logo">NetxShope</div>
 </header>
 
@@ -130,7 +167,7 @@ Comprar
 <img src="https://http2.mlstatic.com/D_NQ_NP_750428-MLB94542399071_102025-O.webp">
 <h3>Kit 2 Steps 60x30x10cm Fitness Preto e Azul</h3>
 <p class="preco">R$ 199,99</p>
-<button onclick="comprar('Kit 2 Steps 60x30x10cm Fitness Preto e Azul',199,99)">
+<button onclick="comprar('Kit 2 Steps 60x30x10cm Fitness Preto e Azul',199.99)">
 Comprar
 </button>
 </div>
@@ -138,9 +175,9 @@ Comprar
 <!-- PRODUTO 3 -->
 <div class="card">
 <img src="https://http2.mlstatic.com/D_NQ_NP_856518-MLA100110463035_122025-O.webp">
-<h3>halteres 2kg</h3>
+<h3>Halteres 2kg</h3>
 <p class="preco">R$ 79,99</p>
-<button onclick="comprar('halteres 2kg',79.99)">
+<button onclick="comprar('Halteres 2kg',79.99)">
 Comprar
 </button>
 </div>
@@ -153,15 +190,17 @@ Comprar
 </footer>
 
 <script>
-function comprar(produto, preco){
+function toggleMenu(){
+document.getElementById("sidebar").classList.toggle("active")
+}
 
+function comprar(produto, preco){
 let mensagem = "Olá! Quero comprar:%0A"
 + "Produto: " + produto + "%0A"
 + "Preço: R$ " + preco + "%0A%0A"
 + "Pode me ajudar com o pedido?"
 
 window.open("https://wa.me/5535998911405?text=" + mensagem, "_blank")
-
 }
 </script>
 
