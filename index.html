@@ -2,167 +2,168 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>NETXSHOPE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetxShope</title>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+
 body{
-margin:0;
-font-family:Arial;
-background:#0f0f0f;
+background:#1f1f1f;
 color:white;
 }
 
+/* HEADER */
 header{
-background:black;
+background:#0f5132;
 padding:20px;
-text-align:center;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
+
+.logo{
 font-size:30px;
 font-weight:bold;
-color:#00ff88;
-box-shadow:0 0 20px #00ff88;
+color:#4ade80;
 }
 
-.container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-padding:20px;
-}
-
-.produto{
-background:#111;
-border-radius:10px;
-padding:20px;
-margin:15px;
-width:220px;
+/* HERO */
+.hero{
 text-align:center;
-box-shadow:0 0 15px #00ff88;
+padding:70px 20px;
+background:linear-gradient(135deg,#0f5132,#4ade80);
+}
+
+.hero h1{font-size:42px;margin-bottom:15px;}
+.hero p{font-size:18px;}
+
+/* PRODUTOS */
+.produtos{
+padding:60px 20px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:#2c2c2c;
+border-radius:15px;
+padding:20px;
 transition:0.3s;
 }
 
-.produto:hover{
-transform:scale(1.05);
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.preco{
+color:#4ade80;
+font-size:22px;
+margin:10px 0;
 }
 
 button{
-background:#00ff88;
+background:#4ade80;
 border:none;
-padding:10px 15px;
+padding:12px 25px;
 border-radius:8px;
-font-weight:bold;
 cursor:pointer;
-margin-top:10px;
+font-weight:bold;
 }
 
 button:hover{
-background:#00cc6a;
+background:#22c55e;
 }
 
-.carrinho{
-position:fixed;
-right:0;
-top:0;
-width:280px;
-height:100%;
-background:black;
-padding:20px;
-box-shadow:-5px 0 15px #00ff88;
-overflow:auto;
-}
-
-.total{
-margin-top:20px;
-font-size:20px;
-}
-
-.whatsapp{
-background:#25d366;
-width:100%;
-margin-top:10px;
+/* FOOTER */
+footer{
+background:#0f5132;
+text-align:center;
+padding:25px;
+margin-top:50px;
 }
 </style>
 </head>
 
 <body>
 
-<header>NETXSHOPE</header>
+<header>
+<div class="logo">NetxShope</div>
+</header>
 
-<div class="container">
+<section class="hero">
+<h1>Bem vindo à NetxShope</h1>
+<p>Os melhores produtos com os melhores preços 🔥</p>
+</section>
 
-<div class="produto">
-<h3>Fone Gamer</h3>
-<p>R$ 120</p>
-<button onclick="addCarrinho('Fone Gamer',120)">Comprar</button>
-</div>
+<section class="produtos">
+<h2>Produtos</h2>
 
-<div class="produto">
-<h3>Smartwatch</h3>
-<p>R$ 200</p>
-<button onclick="addCarrinho('Smartwatch',200)">Comprar</button>
-</div>
+<div class="grid">
 
-<div class="produto">
-<h3>Teclado RGB</h3>
-<p>R$ 150</p>
-<button onclick="addCarrinho('Teclado RGB',150)">Comprar</button>
-</div>
-
-<div class="produto">
-<h3>Mouse Gamer</h3>
-<p>R$ 80</p>
-<button onclick="addCarrinho('Mouse Gamer',80)">Comprar</button>
-</div>
-
-</div>
-
-<div class="carrinho">
-<h2>🛒 Carrinho</h2>
-<ul id="lista"></ul>
-<div class="total">Total: R$ <span id="total">0</span></div>
-
-<button class="whatsapp" onclick="finalizarCompra()">
-Finalizar no WhatsApp
+<!-- PRODUTO 1 -->
+<div class="card">
+<img src="produto1.jpg">
+<h3>Step Fitness Profissional</h3>
+<p class="preco">R$ 79,90</p>
+<button onclick="comprar('Step Fitness Profissional',79.90)">
+Comprar
 </button>
 </div>
 
+<!-- PRODUTO 2 -->
+<div class="card">
+<img src="produto2.jpg">
+<h3>Halter Fitness Profissional</h3>
+<p class="preco">R$ 49,90</p>
+<button onclick="comprar('Halter Fitness Profissional',49.90)">
+Comprar
+</button>
+</div>
+
+<!-- PRODUTO 3 -->
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<h3>Produto Exclusivo</h3>
+<p class="preco">R$ 99,90</p>
+<button onclick="comprar('Produto Exclusivo',99.90)">
+Comprar
+</button>
+</div>
+
+</div>
+</section>
+
+<footer>
+<p>© 2026 NetxShope — Todos os direitos reservados</p>
+</footer>
+
 <script>
-let carrinho = [];
-let total = 0;
+function comprar(produto, preco){
 
-function addCarrinho(nome, preco){
-carrinho.push(nome + " - R$" + preco);
-total += preco;
-atualizar();
-}
+let mensagem = "Olá! Quero comprar:%0A"
++ "Produto: " + produto + "%0A"
++ "Preço: R$ " + preco + "%0A%0A"
++ "Pode me ajudar com o pedido?"
 
-function atualizar(){
-let lista = document.getElementById("lista");
-lista.innerHTML="";
+window.open("https://wa.me/5535998911405?text=" + mensagem, "_blank")
 
-carrinho.forEach(item=>{
-let li=document.createElement("li");
-li.textContent=item;
-lista.appendChild(li);
-});
-
-document.getElementById("total").textContent=total;
-}
-
-function finalizarCompra(){
-if(carrinho.length==0){
-alert("Seu carrinho está vazio!");
-return;
-}
-
-let mensagem="Olá, quero comprar:%0A";
-carrinho.forEach(item=>{
-mensagem+=item+"%0A";
-});
-mensagem+="Total: R$"+total;
-
-window.open("https://wa.me/5535989911405?text="+mensagem);
 }
 </script>
 
 </body>
-  </html>
+</html>
